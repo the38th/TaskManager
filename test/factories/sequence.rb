@@ -1,7 +1,9 @@
 FactoryBot.define do
-  sequence(:string, aliases: [:first_name, :last_name, :password, :avatar, :name, :state]) do |n|
+  sequence(:string, aliases: [:first_name, :last_name, :password, :avatar, :name]) do |n|
     "string#{n}"
   end
+
+  sequence(:state) { 'new_task' }
 
   sequence(:email) { |n| "person#{n}@example.com" }
 
