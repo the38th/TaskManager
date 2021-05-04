@@ -5,7 +5,7 @@ FactoryBot.define do
 
   sequence(:email) { |n| "person#{n}@example.com" }
 
-  sequence(:type) { ['Developer', 'Manager', 'Admin'][rand(3)] }
+  sequence(:type) { ['Developer', 'Manager', 'Admin'].sample }
 
   sequence(:description) { |n| "description#{n}" }
 
