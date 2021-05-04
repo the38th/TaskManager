@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
   state_machine initial: :new_task do
     event :archive do
-      transition any => :archived
+      transition new_task: :archived, released: :archived
     end
 
     event :start_developing do
@@ -17,7 +17,7 @@ class Task < ApplicationRecord
     end
 
     event :start_reviewing do
-      transition in_development: :in_code_review
+      transition in_qa: :in_code_review
     end
 
     event :pre_releasing do
