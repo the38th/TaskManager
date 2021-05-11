@@ -55,3 +55,5 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'state_machines-activerecord'
 gem 'simple_form'
 gem 'state_machines'
+
+gem "slim-rails"
