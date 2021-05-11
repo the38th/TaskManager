@@ -56,4 +56,4 @@ gem 'state_machines-activerecord'
 gem 'simple_form'
 gem 'state_machines'
 
-gem "slim-rails"
+gem 'slim-rails'
