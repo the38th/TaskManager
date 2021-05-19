@@ -1,3 +1,1 @@
-= simple_form_for @user, as: :user, url: admin_users_path do |f|
-  h4 Create new user
-  = render partial: 'admin/users/form', locals: { f: f }
+= render partial: 'admin/users/form', locals: { url: admin_users_path, title: "Create new user" }
