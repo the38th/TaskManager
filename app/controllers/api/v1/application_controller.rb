@@ -1,30 +1,30 @@
 class Api::V1::ApplicationController < Api::ApplicationController
-    RANSACK_DEFAULT_SORT = 'id ASC'
+  RANSACK_DEFAULT_SORT = 'id ASC'.freeze
 
-    def build_meta(collection)
+  def build_meta(collection)
     {
-        count: collection.count,
-        total_count: collection.total_count,
-        current_page: collection.current_page,
-        total_pages: collection.total_pages,
-        per_page: collection.limit_value
+      count: collection.count,
+      total_count: collection.total_count,
+      current_page: collection.current_page,
+      total_pages: collection.total_pages,
+      per_page: collection.limit_value,
     }
-    end
+  end
 
-    def ransack_params
+  def ransack_params
     params.to_unsafe_h.fetch(:q, { s: RANSACK_DEFAULT_SORT })
-    end
+  end
 
-    def page
+  def page
     params.fetch(:page, 1)
-    end
+  end
 
-    def per_page
+  def per_page
     per = params.fetch(:per, 10).to_i
     per > 100 ? 100 : per
-    end
+  end
 
-    def self.responder
-        JsonResponder
-      end
+  def self.responder
+    JsonResponder
+  end
 end
