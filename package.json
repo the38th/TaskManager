@@ -17,6 +17,7 @@
   "version": "0.1.0",
   "devDependencies": {
     "eslint": "^7.27.0",
+    "prettier": "2.3.0",
     "webpack-dev-server": "^3.11.0"
   }
 }
