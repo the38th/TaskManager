@@ -60,3 +60,4 @@ gem 'kaminari'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'responders'
 gem 'active_model_serializers'
+gem 'webpacker-react', "~> 1.0.0.beta.1"
