@@ -43,6 +43,7 @@
       "react/prop-types": [2, { "ignore": ["classes", "match", "dictionaries", "errors", "history", "children", "location"] }],
       "no-debugger": 1,
       "react/destructuring-assignment": 0,
-      "react/static-property-placement": 0
+      "react/static-property-placement": 0,
+      "max-len": [2, { "code": 120 }]
       }
     }
