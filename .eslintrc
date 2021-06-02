@@ -45,6 +45,7 @@
       "no-shadow" : 1,
       "no-use-before-define" : 1,
       "react/destructuring-assignment": 0,
+      "react/forbid-prop-types": 1,
       "react/static-property-placement": 0,
       "max-len": [2, { "code": 120 }]
       }
