@@ -34,6 +34,9 @@ const ColumnHeader = ({ column, onLoadMore }) => {
   );
 };
 
-// ColumnHeader.propTypes = {};
+ColumnHeader.propTypes = {
+  column: PropTypes.object.isRequired,
+  onLoadMore: PropTypes.func.isRequired,
+};
 
 export default ColumnHeader;
