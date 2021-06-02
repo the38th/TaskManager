@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import KanbanBoard from '@lourenci/react-kanban';
 import { propOr } from 'ramda';
 
-import Task from 'components/Task';
-import TasksRepository from 'repositories/TasksRepository';
+import Task from '../Task';
+import TasksRepository from '../../repositories/TasksRepository';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
