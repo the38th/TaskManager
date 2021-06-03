@@ -1,6 +1,4 @@
 class Api::V1::TasksController < Api::V1::ApplicationController
-  respond_to :json
-
   def index
     tasks = Task.all.
       ransack(ransack_params).
@@ -18,7 +16,9 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   end
 
   def create
-    task = current_user.my_tasks.new(task_params)
+    p = task_params
+    p['author_id'] = current_user.id
+    task = current_user.my_tasks.new(p)
     task.save
 
     respond_with(task, serializer: TaskSerializer, location: nil)
