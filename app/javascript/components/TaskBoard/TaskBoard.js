@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import KanbanBoard from '@lourenci/react-kanban';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import { propOr } from 'ramda';
 
 import Task from 'components/Task';
 import ColumnHeader from 'components/ColumnHeader';
 import TasksRepository from 'repositories/TasksRepository';
+import Styles from './useStyles';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -26,6 +29,7 @@ const initialBoard = {
 };
 
 const TaskBoard = () => {
+  const styles = Styles();
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
   useEffect(() => loadBoard(), []);
@@ -93,13 +97,18 @@ const TaskBoard = () => {
   };
 
   return (
-    <KanbanBoard
-      renderCard={(card) => <Task task={card} />}
-      renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
-      onCardDragEnd={handleCardDragEnd}
-    >
-      {board}
-    </KanbanBoard>
+    <div>
+      <KanbanBoard
+        renderCard={(card) => <Task task={card} />}
+        renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
+        onCardDragEnd={handleCardDragEnd}
+      >
+        {board}
+      </KanbanBoard>
+      <Fab className={styles.addButton} color="primary" aria-label="add">
+        <AddIcon />
+      </Fab>
+    </div>
   );
 };
 
