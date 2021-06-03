@@ -1,4 +1,2 @@
-class Api::ApplicationController < ActionController::Base
-    include AuthHelper
-    helper_method :current_user
+class Api::ApplicationController < ApplicationController
 end
