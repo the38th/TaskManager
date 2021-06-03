@@ -7,6 +7,8 @@ import { propOr } from 'ramda';
 import Task from 'components/Task';
 import ColumnHeader from 'components/ColumnHeader';
 import TasksRepository from 'repositories/TasksRepository';
+import AddPopup from 'components/AddPopup';
+import TaskForm from 'forms/TaskForm';
 import Styles from './useStyles';
 
 const STATES = [
@@ -28,10 +30,16 @@ const initialBoard = {
   })),
 };
 
+const MODES = {
+  ADD: 'add',
+  NONE: 'none',
+};
+
 const TaskBoard = () => {
   const styles = Styles();
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
+  const [mode, setMode] = useState(MODES.NONE);
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
 
@@ -96,6 +104,22 @@ const TaskBoard = () => {
       });
   };
 
+  const handleOpenAddPopup = () => {
+    setMode(MODES.ADD);
+  };
+
+  const handleClose = () => {
+    setMode(MODES.NONE);
+  };
+
+  const handleTaskCreate = (params) => {
+    const attributes = TaskForm.attributesToSubmit(params);
+    return TasksRepository.create(attributes).then(({ data: { task } }) => {
+      loadColumnInitial(task.state);
+      handleClose(MODES.NONE);
+    });
+  };
+
   return (
     <div>
       <KanbanBoard
@@ -105,9 +129,10 @@ const TaskBoard = () => {
       >
         {board}
       </KanbanBoard>
-      <Fab className={styles.addButton} color="primary" aria-label="add">
+      <Fab className={styles.addButton} color="primary" aria-label="add" onClick={handleOpenAddPopup}>
         <AddIcon />
       </Fab>
+      {mode === MODES.ADD && <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />}
     </div>
   );
 };
