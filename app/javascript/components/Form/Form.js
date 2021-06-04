@@ -37,8 +37,8 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
       <UserSelect
         label="Author"
         value={task.author}
-        onChange={handleChangeSelect('author')}
-        isDisabled
+        onChange={handleChangeSelect('assignee')}
+        isDisabled={false}
         isRequired
         error={has('author', errors)}
         helperText={errors.author}
