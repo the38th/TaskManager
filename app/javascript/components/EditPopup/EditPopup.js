@@ -25,6 +25,8 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
     onLoadCard(cardId).then(setTask);
   }, []);
 
+  const handleChangeSelect = (fieldName) => (user) => onCardUpdate({ ...task, [fieldName]: user });
+
   const handleCardUpdate = () => {
     setSaving(true);
 
@@ -68,7 +70,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
               <CircularProgress />
             </div>
           ) : (
-            <Form errors={errors} onChange={setTask} task={task} />
+            <Form errors={errors} onChange={setTask} task={task} handleChangeSelect={handleChangeSelect} />
           )}
         </CardContent>
         <CardActions className={styles.actions}>
