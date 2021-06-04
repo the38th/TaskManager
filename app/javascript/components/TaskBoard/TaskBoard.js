@@ -43,7 +43,9 @@ const TaskBoard = () => {
   const [boardCards, setBoardCards] = useState([]);
   const [mode, setMode] = useState(MODES.NONE);
   const [openedTaskId, setOpenedTaskId] = useState(null);
+  // eslint-disable-next-line no-use-before-define
   useEffect(() => loadBoard(), []);
+  // eslint-disable-next-line no-use-before-define
   useEffect(() => generateBoard(), [boardCards]);
 
   const loadColumn = (state, page, perPage) =>
@@ -76,6 +78,7 @@ const TaskBoard = () => {
   };
 
   const generateBoard = () => {
+    // eslint-disable-next-line no-shadow
     const board = {
       columns: STATES.map(({ key, value }) => ({
         id: key,
@@ -103,6 +106,7 @@ const TaskBoard = () => {
         loadColumnInitial(source.fromColumnId);
       })
       .catch((error) => {
+        // eslint-disable-next-line no-alert
         alert(`Move failed! ${error.message}`);
       });
   };
