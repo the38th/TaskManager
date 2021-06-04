@@ -37,6 +37,7 @@ const ColumnHeader = ({ column, onLoadMore }) => {
 };
 
 ColumnHeader.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   column: PropTypes.object.isRequired,
   onLoadMore: PropTypes.func.isRequired,
 };
