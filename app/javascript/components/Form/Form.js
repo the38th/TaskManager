@@ -16,7 +16,7 @@ const Form = ({ errors, onChange, task }) => {
         error={has('name', errors)}
         helperText={errors.name}
         name="name"
-        onChange={handleChangeTextField()}
+        onChange={handleChangeTextField}
         value={task.name}
         label="Name"
         required
@@ -26,7 +26,7 @@ const Form = ({ errors, onChange, task }) => {
         error={has('description', errors)}
         helperText={errors.description}
         name="description"
-        onChange={handleChangeTextField()}
+        onChange={handleChangeTextField}
         value={task.description}
         label="Description"
         required
