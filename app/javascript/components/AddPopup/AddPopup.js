@@ -32,7 +32,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
       }
     });
   };
-  const handleChangeTextField = (fieldName) => (event) => changeTask({ ...task, [fieldName]: event.target.value });
+  const handleChangeTextField = ({ target: { name, value } }) => changeTask({ ...task, [name]: value });
   const styles = useStyles();
 
   return (
@@ -51,7 +51,8 @@ const AddPopup = ({ onClose, onCreateCard }) => {
             <TextField
               error={has('name', errors)}
               helperText={errors.name}
-              onChange={handleChangeTextField('name')}
+              name="name"
+              onChange={handleChangeTextField}
               value={task.name}
               label="Name"
               required
@@ -60,7 +61,8 @@ const AddPopup = ({ onClose, onCreateCard }) => {
             <TextField
               error={has('description', errors)}
               helperText={errors.description}
-              onChange={handleChangeTextField('description')}
+              name="description"
+              onChange={handleChangeTextField}
               value={task.description}
               label="Description"
               required
