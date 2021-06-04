@@ -25,7 +25,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
     onLoadCard(cardId).then(setTask);
   }, []);
 
-  const handleChangeSelect = (fieldName) => (user) => onCardUpdate({ ...task, [fieldName]: user });
+  const handleChangeSelect = (fieldName) => (user) => setTask({ ...task, [fieldName]: user });
 
   const handleCardUpdate = () => {
     setSaving(true);
