@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { has } from 'ramda';
 
 import UserSelect from 'components/UserSelect';
+import TaskPresenter from 'presenters/TaskPresenter';
 import TextField from '@material-ui/core/TextField';
 
 import useStyles from './useStyles';
@@ -18,7 +19,7 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
         helperText={errors.name}
         name="name"
         onChange={handleChangeTextField}
-        value={task.name}
+        value={TaskPresenter.name(task)}
         label="Name"
         required
         margin="dense"
@@ -28,7 +29,7 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
         helperText={errors.description}
         name="description"
         onChange={handleChangeTextField}
-        value={task.description}
+        value={TaskPresenter.description(task)}
         label="Description"
         required
         multiline
@@ -36,7 +37,7 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
       />
       <UserSelect
         label="Author"
-        value={task.author}
+        value={TaskPresenter.author(task)}
         onChange={handleChangeSelect('author')}
         isDisabled
         isRequired
@@ -45,7 +46,7 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
       />
       <UserSelect
         label="Assignee"
-        value={task.assignee}
+        value={TaskPresenter.assignee(task)}
         onChange={handleChangeSelect('assignee')}
         isClearable
         error={has('assignee', errors)}
