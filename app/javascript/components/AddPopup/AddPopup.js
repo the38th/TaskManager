@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { has } from 'ramda';
 
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -10,7 +9,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Modal from '@material-ui/core/Modal';
-import TextField from '@material-ui/core/TextField';
+
+import Form from 'components/Form';
 
 import TaskForm from 'forms/TaskForm';
 
@@ -33,7 +33,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
       }
     });
   };
-  const handleChangeTextField = ({ target: { name, value } }) => changeTask({ ...task, [name]: value });
+  const handleChangeSelect = (fieldName) => (user) => changeTask({ ...task, [fieldName]: user });
   const styles = useStyles();
 
   return (
@@ -48,28 +48,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
           title="Add New Task"
         />
         <CardContent>
-          <div className={styles.form}>
-            <TextField
-              error={has('name', errors)}
-              helperText={errors.name}
-              name="name"
-              onChange={handleChangeTextField}
-              value={task.name}
-              label="Name"
-              required
-              margin="dense"
-            />
-            <TextField
-              error={has('description', errors)}
-              helperText={errors.description}
-              name="description"
-              onChange={handleChangeTextField}
-              value={task.description}
-              label="Description"
-              required
-              margin="dense"
-            />
-          </div>
+          <Form errors={errors} onChange={changeTask} task={task} handleChangeSelect={handleChangeSelect} />
         </CardContent>
         <CardActions className={styles.actions}>
           <Button disabled={isSaving} onClick={handleCreate} variant="contained" size="small" color="primary">
