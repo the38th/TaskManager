@@ -43,6 +43,14 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
         error={has('author', errors)}
         helperText={errors.author}
       />
+      <UserSelect
+        label="Assignee"
+        value={task.assignee}
+        onChange={handleChangeSelect('assignee')}
+        isClearable
+        error={has('assignee', errors)}
+        helperText={errors.assignee}
+      />
     </form>
   );
 };
