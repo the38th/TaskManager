@@ -3,6 +3,7 @@ import FetchHelper from 'utils/fetchHelper';
 
 export default {
   index(params) {
+    console.log(params);
     const path = routes.apiV1UsersPath();
     return FetchHelper.get(path, params);
   },
