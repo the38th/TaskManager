@@ -16,6 +16,15 @@ const initialState = {
   },
 };
 
+const loadData = (state, page = 1, perPage = 10) => {
+  const data = TasksRepository.index({
+    q: { stateEq: state },
+    page,
+    perPage,
+  });
+  return data;
+};
+
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
@@ -53,21 +62,13 @@ export const useTasksActions = () => {
   const dispatch = useDispatch();
 
   const loadColumn = (state, page = 1, perPage = 10) => {
-    TasksRepository.index({
-      q: { stateEq: state },
-      page,
-      perPage,
-    }).then(({ data }) => {
+    loadData(state, page, perPage).then(({ data }) => {
       dispatch(loadColumnSuccess({ ...data, columnId: state }));
     });
   };
 
   const loadColumnMore = (state, page = 1, perPage = 10) => {
-    TasksRepository.index({
-      q: { stateEq: state },
-      page,
-      perPage,
-    }).then(({ data }) => {
+    loadData(state, page, perPage).then(({ data }) => {
       dispatch(loadColumnMoreSuccess({ ...data, columnId: state }));
     });
   };

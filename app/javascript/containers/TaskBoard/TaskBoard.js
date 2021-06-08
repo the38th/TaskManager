@@ -7,6 +7,8 @@ import Task from 'components/Task';
 import AddPopup from 'components/AddPopup';
 import EditPopup from 'components/EditPopup';
 import ColumnHeader from 'components/ColumnHeader';
+import TaskPresenter from 'presenters/TaskPresenter';
+import TasksRepository from 'repositories/TasksRepository';
 
 import useTasks from 'hooks/store/useTasks';
 
@@ -41,8 +43,24 @@ const TaskBoard = () => {
     setOpenedTaskId(null);
   };
 
-  const { loadColumnMore } = useTasks();
-  const handleCardDragEnd = () => {};
+  const { loadColumnMore, loadColumn } = useTasks();
+
+  const handleCardDragEnd = (task, source, destination) => {
+    const transition = task.transitions.find(({ to }) => destination.toColumnId === to);
+    if (!transition) {
+      return null;
+    }
+
+    return TasksRepository.update(TaskPresenter.id(task), { stateEvent: transition.event })
+      .then(() => {
+        loadColumn(destination.toColumnId);
+        loadColumn(source.fromColumnId);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-alert
+        alert(`Move failed! ${error.message}`);
+      });
+  };
   const handleTaskCreate = () => {};
   const handleTaskLoad = () => {};
   const handleTaskUpdate = () => {};
