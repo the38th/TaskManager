@@ -76,7 +76,7 @@ const TaskBoard = () => {
     });
   };
 
-  const handleTaskLoad = () => {};
+  const handleTaskLoad = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
   const handleTaskUpdate = () => {};
   const handleTaskDestroy = () => {};
 
