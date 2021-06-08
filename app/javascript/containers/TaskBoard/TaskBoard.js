@@ -16,6 +16,7 @@ import useTasks from 'hooks/store/useTasks';
 import useStyles from './useStyles';
 
 const MODES = {
+  EDIT: 'edit',
   ADD: 'add',
   NONE: 'none',
 };
