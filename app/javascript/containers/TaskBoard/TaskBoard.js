@@ -77,7 +77,16 @@ const TaskBoard = () => {
   };
 
   const handleTaskLoad = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
-  const handleTaskUpdate = () => {};
+
+  const handleTaskUpdate = (task) => {
+    const attributes = TaskForm.attributesToSubmit(task);
+
+    return TasksRepository.update(TaskPresenter.id(task), attributes).then(() => {
+      loadColumn(TaskPresenter.state(task));
+      handleCloseEditPopup();
+    });
+  };
+
   const handleTaskDestroy = () => {};
 
   return (
