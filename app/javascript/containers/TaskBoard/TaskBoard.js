@@ -87,7 +87,10 @@ const TaskBoard = () => {
     });
   };
 
-  const handleTaskDestroy = () => {};
+  const handleTaskDestroy = (task) =>
+    TasksRepository.destroy(TaskPresenter.id(task)).then(() => {
+      loadColumn(TaskPresenter.state(task));
+    });
 
   return (
     <>
