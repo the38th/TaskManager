@@ -9,6 +9,7 @@ import EditPopup from 'components/EditPopup';
 import ColumnHeader from 'components/ColumnHeader';
 import TaskPresenter from 'presenters/TaskPresenter';
 import TasksRepository from 'repositories/TasksRepository';
+import TaskForm from 'forms/TaskForm';
 
 import useTasks from 'hooks/store/useTasks';
 
@@ -38,6 +39,11 @@ const TaskBoard = () => {
     setMode(MODES.EDIT);
   };
 
+  const handleCloseEditPopup = () => {
+    setMode(MODES.NONE);
+    setOpenedTaskId(null);
+  };
+
   const handleClose = () => {
     setMode(MODES.NONE);
     setOpenedTaskId(null);
@@ -61,7 +67,15 @@ const TaskBoard = () => {
         alert(`Move failed! ${error.message}`);
       });
   };
-  const handleTaskCreate = () => {};
+
+  const handleTaskCreate = (params) => {
+    const attributes = TaskForm.attributesToSubmit(params);
+    return TasksRepository.create(attributes).then(({ data: { task } }) => {
+      loadColumn(TaskPresenter.state(task));
+      handleCloseEditPopup(MODES.NONE);
+    });
+  };
+
   const handleTaskLoad = () => {};
   const handleTaskUpdate = () => {};
   const handleTaskDestroy = () => {};
