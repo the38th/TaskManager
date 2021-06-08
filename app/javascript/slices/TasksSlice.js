@@ -51,9 +51,7 @@ export const useTasksActions = () => {
     });
   };
 
-  const loadBoard = () => STATES.map(({ key }) => loadColumn(key));
-
   return {
-    loadBoard,
+    loadColumn,
   };
 };
