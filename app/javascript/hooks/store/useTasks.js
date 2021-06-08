@@ -11,6 +11,7 @@ const useTasks = () => {
     board,
     loadBoard,
     loadColumnMore,
+    loadColumn,
   };
 };
 
