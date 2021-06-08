@@ -5,9 +5,9 @@
 
 import 'material-design-lite/material.js';
 import WebpackerReact from 'webpacker-react';
-import TaskBoard from 'components/TaskBoard';
+import App from 'App';
 
-WebpackerReact.setup({ TaskBoard });
+WebpackerReact.setup({ App });
 
 require('@rails/ujs').start();
 require('@rails/activestorage').start();
