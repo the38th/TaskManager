@@ -43,7 +43,7 @@ const TaskBoard = () => {
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
   const [mode, setMode] = useState(MODES.NONE);
-  const [openedTaskId, setOpenedTaskId] = useState(null);
+  const [openedTaskId, setTaskIdOpened] = useState(null);
   // eslint-disable-next-line no-use-before-define
   useEffect(() => loadBoard(), []);
   // eslint-disable-next-line no-use-before-define
@@ -112,25 +112,25 @@ const TaskBoard = () => {
       });
   };
 
-  const handleOpenAddPopup = () => {
+  const handleAddPopupOpen = () => {
     setMode(MODES.ADD);
   };
 
-  const handleOpenEditPopup = (task) => {
-    setOpenedTaskId(TaskPresenter.id(task));
+  const handleEditPopupOpen = (task) => {
+    setTaskIdOpened(TaskPresenter.id(task));
     setMode(MODES.EDIT);
   };
 
-  const handleCloseEditPopup = () => {
+  const handlePopupsClose = () => {
     setMode(MODES.NONE);
-    setOpenedTaskId(null);
+    setTaskIdOpened(null);
   };
 
   const handleTaskCreate = (params) => {
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
       loadColumnInitial(TaskPresenter.state(task));
-      handleCloseEditPopup(MODES.NONE);
+      handlePopupsClose(MODES.NONE);
     });
   };
 
@@ -141,7 +141,7 @@ const TaskBoard = () => {
 
     return TasksRepository.update(TaskPresenter.id(task), attributes).then(() => {
       loadColumnInitial(TaskPresenter.state(task));
-      handleCloseEditPopup();
+      handlePopupsClose();
     });
   };
 
@@ -153,20 +153,20 @@ const TaskBoard = () => {
   return (
     <div>
       <KanbanBoard
-        renderCard={(card) => <Task task={card} onClick={handleOpenEditPopup} />}
+        renderCard={(card) => <Task task={card} onClick={handleEditPopupOpen} />}
         renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
         onCardDragEnd={handleCardDragEnd}
       >
         {board}
       </KanbanBoard>
-      <Fab className={styles.addButton} color="primary" aria-label="add" onClick={handleOpenAddPopup}>
+      <Fab className={styles.addButton} color="primary" aria-label="add" onClick={handleAddPopupOpen}>
         <AddIcon />
       </Fab>
-      {mode === MODES.ADD && <AddPopup onCreateCard={handleTaskCreate} onClose={handleCloseEditPopup} />}
+      {mode === MODES.ADD && <AddPopup onCreateCard={handleTaskCreate} onClose={handlePopupsClose} />}
       {mode === MODES.EDIT && (
         <EditPopup
           cardId={openedTaskId}
-          onClose={handleCloseEditPopup}
+          onClose={handlePopupsClose}
           onCardDestroy={handleTaskDestroy}
           onLoadCard={loadTask}
           onCardUpdate={handleTaskUpdate}
