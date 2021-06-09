@@ -8,8 +8,8 @@ import TextField from '@material-ui/core/TextField';
 
 import useStyles from './useStyles';
 
-const Form = ({ errors, onChange, task, handleChangeSelect }) => {
-  const handleChangeTextField = ({ target: { name, value } }) => onChange({ ...task, [name]: value });
+const Form = ({ errors, onChange, task, handleSelectChange }) => {
+  const handleTextFieldChange = ({ target: { name, value } }) => onChange({ ...task, [name]: value });
   const styles = useStyles();
 
   return (
@@ -18,7 +18,7 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
         error={has('name', errors)}
         helperText={errors.name}
         name="name"
-        onChange={handleChangeTextField}
+        onChange={handleTextFieldChange}
         value={TaskPresenter.name(task)}
         label="Name"
         required
@@ -28,7 +28,7 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
         error={has('description', errors)}
         helperText={errors.description}
         name="description"
-        onChange={handleChangeTextField}
+        onChange={handleTextFieldChange}
         value={TaskPresenter.description(task)}
         label="Description"
         required
@@ -38,7 +38,7 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
       <UserSelect
         label="Author"
         value={TaskPresenter.author(task)}
-        onChange={handleChangeSelect('author')}
+        onChange={handleSelectChange('author')}
         isDisabled
         isRequired
         error={has('author', errors)}
@@ -47,7 +47,7 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
       <UserSelect
         label="Assignee"
         value={TaskPresenter.assignee(task)}
-        onChange={handleChangeSelect('assignee')}
+        onChange={handleSelectChange('assignee')}
         isClearable
         error={has('assignee', errors)}
         helperText={errors.assignee}
@@ -58,7 +58,7 @@ const Form = ({ errors, onChange, task, handleChangeSelect }) => {
 
 Form.propTypes = {
   onChange: PropTypes.func.isRequired,
-  handleChangeSelect: PropTypes.func.isRequired,
+  handleSelectChange: PropTypes.func.isRequired,
   task: PropTypes.shape().isRequired,
   errors: PropTypes.shape({
     name: PropTypes.arrayOf(PropTypes.string),

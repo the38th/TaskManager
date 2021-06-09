@@ -16,14 +16,14 @@ import TaskForm from 'forms/TaskForm';
 
 import useStyles from './useStyles';
 
-const AddPopup = ({ onClose, onCreateCard }) => {
+const AddPopup = ({ onClose, onCardCreate }) => {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
   const handleCreate = () => {
     setSaving(true);
 
-    onCreateCard(task).catch((error) => {
+    onCardCreate(task).catch((error) => {
       setSaving(false);
       setErrors(error || {});
 
@@ -33,7 +33,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
       }
     });
   };
-  const handleChangeSelect = (fieldName) => (user) => changeTask({ ...task, [fieldName]: user });
+  const handleSelectChange = (fieldName) => (user) => changeTask({ ...task, [fieldName]: user });
   const styles = useStyles();
 
   return (
@@ -48,7 +48,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
           title="Add New Task"
         />
         <CardContent>
-          <Form errors={errors} onChange={changeTask} task={task} handleChangeSelect={handleChangeSelect} />
+          <Form errors={errors} onChange={changeTask} task={task} handleSelectChange={handleSelectChange} />
         </CardContent>
         <CardActions className={styles.actions}>
           <Button disabled={isSaving} onClick={handleCreate} variant="contained" size="small" color="primary">
@@ -62,7 +62,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
 
 AddPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
-  onCreateCard: PropTypes.func.isRequired,
+  onCardCreate: PropTypes.func.isRequired,
 };
 
 export default AddPopup;
