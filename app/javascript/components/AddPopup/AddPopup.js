@@ -33,7 +33,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
       }
     });
   };
-  const handleChangeSelect = (fieldName) => (user) => changeTask({ ...task, [fieldName]: user });
+  const handleSelectChange = (fieldName) => (user) => changeTask({ ...task, [fieldName]: user });
   const styles = useStyles();
 
   return (
@@ -48,7 +48,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
           title="Add New Task"
         />
         <CardContent>
-          <Form errors={errors} onChange={changeTask} task={task} handleChangeSelect={handleChangeSelect} />
+          <Form errors={errors} onChange={changeTask} task={task} onSelectChange={handleSelectChange} />
         </CardContent>
         <CardActions className={styles.actions}>
           <Button disabled={isSaving} onClick={handleCardCreate} variant="contained" size="small" color="primary">
