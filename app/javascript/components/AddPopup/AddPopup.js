@@ -20,7 +20,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
-  const handleCreate = () => {
+  const handleCardCreate = () => {
     setSaving(true);
 
     onCreateCard(task).catch((error) => {
@@ -72,7 +72,7 @@ const AddPopup = ({ onClose, onCreateCard }) => {
           </div>
         </CardContent>
         <CardActions className={styles.actions}>
-          <Button disabled={isSaving} onClick={handleCreate} variant="contained" size="small" color="primary">
+          <Button disabled={isSaving} onClick={handleCardCreate} variant="contained" size="small" color="primary">
             Add
           </Button>
         </CardActions>
