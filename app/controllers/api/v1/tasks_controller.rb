@@ -19,7 +19,10 @@ class Api::V1::TasksController < Api::V1::ApplicationController
     p = task_params
     p['author_id'] = current_user.id
     task = current_user.my_tasks.new(p)
-    task.save
+    
+    if task.save
+      UserMailer.with({ user: current_user, task: task }).task_created.deliver_now
+    end
 
     respond_with(task, serializer: TaskSerializer, location: nil)
   end
