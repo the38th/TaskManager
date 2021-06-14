@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+<a href='https://coveralls.io/github/the38th/TaskManager'><img src='https://coveralls.io/repos/github/the38th/TaskManager/badge.svg' alt='Coverage Status' /></a>
