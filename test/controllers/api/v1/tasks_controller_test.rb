@@ -25,10 +25,10 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
       post :create, params: { task: task_attributes, format: :json }
     end
     assert_response :created
-  
+
     data = JSON.parse(response.body)
     created_task = Task.find(data['task']['id'])
-  
+
     assert created_task.present?
     assert created_task.assignee.id == assignee.id
     assert created_task.author.id == author.id
