@@ -2,6 +2,6 @@ class UserMailer < ApplicationMailer
     def task_created
       user = params[:user]
   
-      mail(to: user.email)
+      mail(from: 'noreply@taskmanager.com', to: user.email)
     end
   end
