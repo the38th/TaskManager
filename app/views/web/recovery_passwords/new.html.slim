@@ -1,0 +1,7 @@
+h3 Reset Password
+
+= simple_form_for :recovery_passwords, url: recovery_passwords_path do |f|
+  p
+    = f.input :email
+  p
+    = f.button :submit, "Reset Password"

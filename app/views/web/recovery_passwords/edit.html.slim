@@ -1,0 +1,15 @@
+h4 Reset Password
+
+= simple_form_for @user, url: recovery_password_path(params[:id]) do |f|
+  = if @user.errors.any?
+    div class='error_messages'
+      h4 Form is invalid
+      ul
+        = for message in @user.errors.full_messages
+          li 
+            = message
+  p
+    = f.input :password
+    = f.input :password_confirmation
+  p
+    = f.submit 'Update password'
