@@ -41,7 +41,7 @@ services:
 
   sidekiq:
     build: .
-    command: bundle exec sidekiq -C /task_manager/config/sidekiq.yml
+    command: bundle exec sidekiq -C config/sidekiq.yml
     environment: *web-environment
     volumes: *web-volumes
     depends_on:

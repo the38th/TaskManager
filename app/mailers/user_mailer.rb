@@ -15,9 +15,10 @@ class UserMailer < ApplicationMailer
   end
 
   def task_deleted
-    @task = params[:task]
-
-    mail(from: 'noreply@taskmanager.com', to: @task.author.email, subject: 'Task Deleted')
+    user = params[:user]
+    @task_id = params[:task_id]
+    
+    mail(from: 'noreply@taskmanager.com', to: user.email, subject: 'Task Deleted')
   end
 
   def forgot_password
