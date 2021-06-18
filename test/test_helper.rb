@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'sidekiq/testing'
 SimpleCov.start
 
 ENV['RAILS_ENV'] ||= 'test'
