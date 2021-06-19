@@ -17,7 +17,7 @@ class UserMailer < ApplicationMailer
   def task_deleted
     user = params[:user]
     @task_id = params[:task_id]
-    
+
     mail(from: 'noreply@taskmanager.com', to: user.email, subject: 'Task Deleted')
   end
 

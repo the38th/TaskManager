@@ -12,7 +12,7 @@ class User < ApplicationRecord
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    SendForgotPasswordNotificationJob.perform_async(self.id)
+    SendForgotPasswordNotificationJob.perform_async(id)
   end
 
   def generate_token(column)
