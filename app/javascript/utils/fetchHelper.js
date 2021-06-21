@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+import objectToFormData from 'object-to-formdata';
 
 import { camelize, decamelize } from './keysConverter';
 
@@ -59,5 +60,18 @@ export default {
 
   delete(url) {
     return axios.delete(url);
+  },
+
+  putFormData(url, json) {
+    const body = decamelize(json);
+    const formData = objectToFormData(body);
+
+    return axios
+      .put(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(camelize);
   },
 };
