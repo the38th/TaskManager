@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  has_one_attached :image
+
   state_machine initial: :new_task do
     event :archive do
       transition [:new_task, :released] => :archived
