@@ -80,7 +80,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate, o
               errors={errors}
               onChange={setTask}
               task={task}
-              handleSelectChange={handleSelectChange}
+              onSelectChange={handleSelectChange}
               onImageAttach={onImageAttach}
               onImageRemove={onImageRemove}
             />

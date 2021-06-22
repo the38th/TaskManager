@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 
 import useStyles from './useStyles';
 
-const Form = ({ errors, onChange, task, handleSelectChange, onImageAttach, onImageRemove }) => {
+const Form = ({ errors, onChange, task, onSelectChange, onImageAttach, onImageRemove }) => {
   const handleTextFieldChange = ({ target: { name, value } }) => onChange({ ...task, [name]: value });
   const styles = useStyles();
 
@@ -40,7 +40,7 @@ const Form = ({ errors, onChange, task, handleSelectChange, onImageAttach, onIma
       <UserSelect
         label="Author"
         value={TaskPresenter.author(task)}
-        onChange={handleSelectChange('author')}
+        onChange={onSelectChange('author')}
         isDisabled
         isRequired
         error={has('author', errors)}
@@ -49,7 +49,7 @@ const Form = ({ errors, onChange, task, handleSelectChange, onImageAttach, onIma
       <UserSelect
         label="Assignee"
         value={TaskPresenter.assignee(task)}
-        onChange={handleSelectChange('assignee')}
+        onChange={onSelectChange('assignee')}
         isClearable
         error={has('assignee', errors)}
         helperText={errors.assignee}
@@ -72,7 +72,7 @@ const Form = ({ errors, onChange, task, handleSelectChange, onImageAttach, onIma
 
 Form.propTypes = {
   onChange: PropTypes.func.isRequired,
-  handleSelectChange: PropTypes.func.isRequired,
+  onSelectChange: PropTypes.func.isRequired,
   task: PropTypes.shape().isRequired,
   errors: PropTypes.shape({
     name: PropTypes.arrayOf(PropTypes.string),

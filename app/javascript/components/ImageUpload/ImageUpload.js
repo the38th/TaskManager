@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import useStyles from './useStyles';
 import ReactCrop, { makeAspectCrop } from 'react-image-crop';
 import Button from '@material-ui/core/Button';
 import { isNil, path } from 'ramda';
+
+import useStyles from './useStyles';
 
 const DEFAULT_CROP_PARAMS = {
   x: 0,
@@ -16,8 +17,8 @@ const ImageUpload = ({ onImageUpload }) => {
 
   const [fileAsBase64, changeFileAsBase64] = useState(null);
   const [cropParams, changeCropParams] = useState(DEFAULT_CROP_PARAMS);
-  const [file, changeFile] = useState(null);
-  const [image, changeImage] = useState(null);
+  const [file, setFile] = useState(null);
+  const [image, setImage] = useState(null);
 
   const handleCropComplete = (newCrop, newPercentageCrop) => {
     changeCropParams(newPercentageCrop);
@@ -26,7 +27,7 @@ const ImageUpload = ({ onImageUpload }) => {
   const onImageLoaded = (loadedImage) => {
     const newCropParams = makeAspectCrop(DEFAULT_CROP_PARAMS, loadedImage.width, loadedImage.height);
     changeCropParams(newCropParams);
-    changeImage(loadedImage);
+    setImage(loadedImage);
     return false;
   };
 
@@ -37,8 +38,8 @@ const ImageUpload = ({ onImageUpload }) => {
     cropHeight: (params.height * height) / 100,
   });
 
-  const handleCropChange = (_, newCropParams) => {
-    changeCropParams(newCropParams);
+  const handleCropChange = (newCropParams, newPercentageCropParams) => {
+    changeCropParams(newPercentageCropParams);
   };
 
   const handleCropSave = () => {
@@ -49,15 +50,15 @@ const ImageUpload = ({ onImageUpload }) => {
 
   const handleImageRead = (newImage) => changeFileAsBase64(path(['target', 'result'], newImage));
 
-  const handleLoadFile = (e) => {
-    e.preventDefault();
+  const handleLoadFile = (event) => {
+    event.preventDefault();
 
-    const [acceptedFile] = e.target.files;
+    const [acceptedFile] = event.target.files;
 
     const fileReader = new FileReader();
     fileReader.onload = handleImageRead;
     fileReader.readAsDataURL(acceptedFile);
-    changeFile(acceptedFile);
+    setFile(acceptedFile);
   };
 
   return fileAsBase64 ? (
