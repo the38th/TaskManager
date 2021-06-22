@@ -93,6 +93,18 @@ const TaskBoard = () => {
       loadColumn(TaskPresenter.state(task));
     });
 
+  const onImageAttach = (params, image) => {
+    TasksRepository.attachImage(openedTaskId, params, image).then(() => {
+      handleEditPopupClose(MODES.NONE);
+    });
+  };
+
+  const onImageRemove = () => {
+    TasksRepository.removeImage(openedTaskId).then(() => {
+      handleEditPopupClose(MODES.NONE);
+    });
+  };
+
   return (
     <>
       <Fab onClick={handleAddPopupOpen} className={styles.addButton} color="primary" aria-label="add">
@@ -116,6 +128,8 @@ const TaskBoard = () => {
           onCardUpdate={handleTaskUpdate}
           onClose={handlePopupsClose}
           cardId={openedTaskId}
+          onImageAttach={onImageAttach}
+          onImageRemove={onImageRemove}
         />
       )}
     </>

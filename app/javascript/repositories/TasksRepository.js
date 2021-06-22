@@ -27,13 +27,13 @@ export default {
     return FetchHelper.delete(path);
   },
 
-  attachImage(id, task = {}) {
+  attachImage(id, attachment, image) {
     const path = routes.attachImageApiV1TaskPath(id);
-    return FetchHelper.putFormData(path, { task });
+    return FetchHelper.putFormData(path, attachment, image);
   },
 
-  removeImage(id, task = {}) {
+  removeImage(id) {
     const path = routes.removeImageApiV1TaskPath(id);
-    return FetchHelper.putFormData(path, { task });
+    return FetchHelper.putFormData(path);
   },
 };

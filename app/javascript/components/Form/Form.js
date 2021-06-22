@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { has } from 'ramda';
+import { has, isNil } from 'ramda';
 
 import UserSelect from 'components/UserSelect';
+import ImageUpload from 'components/ImageUpload';
 import TaskPresenter from 'presenters/TaskPresenter';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 import useStyles from './useStyles';
 
-const Form = ({ errors, onChange, task, handleSelectChange }) => {
+const Form = ({ errors, onChange, task, handleSelectChange, onImageAttach, onImageRemove }) => {
   const handleTextFieldChange = ({ target: { name, value } }) => onChange({ ...task, [name]: value });
   const styles = useStyles();
 
@@ -52,6 +54,18 @@ const Form = ({ errors, onChange, task, handleSelectChange }) => {
         error={has('assignee', errors)}
         helperText={errors.assignee}
       />
+      {isNil(TaskPresenter.imageUrl(task)) ? (
+        <div className={styles.imageUploadContainer}>
+          <ImageUpload onImageUpload={onImageAttach} />
+        </div>
+      ) : (
+        <div className={styles.previewContainer}>
+          <img className={styles.preview} src={TaskPresenter.imageUrl(task)} alt="Attachment" />
+          <Button variant="contained" size="small" color="primary" onClick={onImageRemove}>
+            Remove image
+          </Button>
+        </div>
+      )}
     </form>
   );
 };
@@ -66,6 +80,8 @@ Form.propTypes = {
     author: PropTypes.arrayOf(PropTypes.string),
     assignee: PropTypes.arrayOf(PropTypes.string),
   }),
+  onImageAttach: PropTypes.func.isRequired,
+  onImageRemove: PropTypes.func.isRequired,
 };
 
 Form.defaultProps = {

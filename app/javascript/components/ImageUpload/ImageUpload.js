@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useStyles from './useStyles';
-import { ReactCrop, makeAspectCrop } from 'react-image-crop';
+import ReactCrop, { makeAspectCrop } from 'react-image-crop';
 import Button from '@material-ui/core/Button';
 import { isNil, path } from 'ramda';
 
 const DEFAULT_CROP_PARAMS = {
   x: 0,
   y: 0,
+  aspect: 1,
 };
 
-const ImageUpload = ({ onUpload }) => {
+const ImageUpload = ({ onImageUpload }) => {
   const styles = useStyles();
 
   const [fileAsBase64, changeFileAsBase64] = useState(null);
@@ -26,6 +27,7 @@ const ImageUpload = ({ onUpload }) => {
     const newCropParams = makeAspectCrop(DEFAULT_CROP_PARAMS, loadedImage.width, loadedImage.height);
     changeCropParams(newCropParams);
     changeImage(loadedImage);
+    return false;
   };
 
   const getActualCropParameters = (width, height, params) => ({
@@ -42,7 +44,7 @@ const ImageUpload = ({ onUpload }) => {
   const handleCropSave = () => {
     const { naturalWidth: width, naturalHeight: height } = image;
     const actualCropParams = getActualCropParameters(width, height, cropParams);
-    onUpload({ attachment: { ...actualCropParams, image: file } });
+    onImageUpload(actualCropParams, file);
   };
 
   const handleImageRead = (newImage) => changeFileAsBase64(path(['target', 'result'], newImage));
@@ -85,7 +87,7 @@ const ImageUpload = ({ onUpload }) => {
 };
 
 ImageUpload.propTypes = {
-  onUpload: PropTypes.func.isRequired,
+  onImageUpload: PropTypes.func.isRequired,
 };
 
 export default ImageUpload;

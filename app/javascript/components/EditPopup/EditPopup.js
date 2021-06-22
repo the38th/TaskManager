@@ -17,7 +17,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import useStyles from './useStyles';
 
-const EditPopup = ({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate }) => {
+const EditPopup = ({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate, onImageAttach, onImageRemove }) => {
   const [task, setTask] = useState(null);
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
@@ -76,7 +76,14 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate })
               <CircularProgress />
             </div>
           ) : (
-            <Form errors={errors} onChange={setTask} task={task} handleSelectChange={handleSelectChange} />
+            <Form
+              errors={errors}
+              onChange={setTask}
+              task={task}
+              handleSelectChange={handleSelectChange}
+              onImageAttach={onImageAttach}
+              onImageRemove={onImageRemove}
+            />
           )}
         </CardContent>
         <CardActions className={styles.actions}>
@@ -105,6 +112,8 @@ EditPopup.propTypes = {
   onCardDestroy: PropTypes.func.isRequired,
   onCardLoad: PropTypes.func.isRequired,
   onCardUpdate: PropTypes.func.isRequired,
+  onImageAttach: PropTypes.func.isRequired,
+  onImageRemove: PropTypes.func.isRequired,
 };
 
 export default EditPopup;
