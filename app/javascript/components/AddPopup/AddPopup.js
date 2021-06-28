@@ -48,7 +48,11 @@ const AddPopup = ({ onClose, onCardCreate }) => {
           title="Add New Task"
         />
         <CardContent>
+<<<<<<< HEAD
           <Form errors={errors} onChange={changeTask} task={task} handleSelectChange={handleSelectChange} />
+=======
+          <Form errors={errors} onChange={changeTask} task={task} handleChangeSelect={handleChangeSelect} />
+>>>>>>> 477b6cf (added Form to AddPopup component)
         </CardContent>
         <CardActions className={styles.actions}>
           <Button disabled={isSaving} onClick={handleCardCreate} variant="contained" size="small" color="primary">
